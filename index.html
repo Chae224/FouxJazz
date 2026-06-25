@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foux de Jazz #2 – 11 Août 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --jaune: #F5D800;
+    --noir: #111111;
+    --blanc: #FFFFFF;
+    --vert: #2E5E40;
+    --gris: #1A1A1A;
+    --gris-clair: #F2F2F0;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--noir);
+    color: var(--blanc);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── TICKER ── */
+  .ticker {
+    background: var(--jaune);
+    color: var(--noir);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0.55rem 0;
+  }
+  .ticker-inner {
+    display: inline-block;
+    animation: ticker 22s linear infinite;
+  }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 4rem 1.5rem 5rem;
+    background: var(--noir);
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(245,216,0,0.13) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* decorative circles */
+  .deco { position: absolute; border-radius: 50%; pointer-events: none; }
+  .deco-1 {
+    width: 320px; height: 320px;
+    background: var(--jaune);
+    opacity: 0.08;
+    top: -80px; left: -100px;
+  }
+  .deco-2 {
+    width: 200px; height: 200px;
+    background: var(--jaune);
+    opacity: 0.06;
+    bottom: 60px; right: -60px;
+  }
+
+  .presenter-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-edition {
+    display: inline-block;
+    background: var(--jaune);
+    color: var(--noir);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+    padding: 0.3rem 1rem;
+    border-radius: 2px;
+    margin-bottom: 1.2rem;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(5rem, 16vw, 12rem);
+    line-height: 0.9;
+    color: var(--jaune);
+    letter-spacing: 0.02em;
+    text-shadow: 0 0 80px rgba(245,216,0,0.2);
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1.1rem, 3vw, 1.6rem);
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.03em;
+  }
+
+  .hero-date-block {
+    border-top: 1px solid rgba(245,216,0,0.4);
+    border-bottom: 1px solid rgba(245,216,0,0.4);
+    padding: 1.2rem 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .hero-date {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    letter-spacing: 0.08em;
+    color: var(--blanc);
+  }
+  .hero-time {
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--jaune);
+    margin-top: 0.2rem;
+  }
+
+  .hero-artists {
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 2.5rem;
+  }
+  .hero-artists span { color: var(--blanc); }
+
+  .btn-reserve {
+    display: inline-block;
+    background: var(--jaune);
+    color: var(--noir);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.2em;
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 30px rgba(245,216,0,0.25);
+  }
+  .btn-reserve:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 40px rgba(245,216,0,0.4);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 1.8rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    opacity: 0.35;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .scroll-hint::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 40px;
+    background: var(--jaune);
+    animation: scrollpulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollpulse {
+    0%,100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(0.6); }
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 5rem 1.5rem; }
+  .container { max-width: 900px; margin: 0 auto; }
+  .wide { max-width: 1100px; margin: 0 auto; }
+
+  .section-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--jaune);
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    letter-spacing: 0.04em;
+    color: var(--blanc);
+    margin-bottom: 1.5rem;
+  }
+  .section-body {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.7);
+  }
+  .section-body p + p { margin-top: 1rem; }
+
+  /* ── LIEU ── */
+  .lieu-section { background: var(--gris); }
+  .lieu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  @media (max-width: 700px) { .lieu-grid { grid-template-columns: 1fr; } }
+
+  .foux-word {
+    display: inline-block;
+    background: var(--jaune);
+    color: var(--noir);
+    font-weight: 600;
+    padding: 0.1rem 0.5rem;
+    border-radius: 2px;
+    font-style: normal;
+  }
+
+  /* ── ARTISTS ── */
+  .artists-section { background: var(--noir); }
+  .musicians-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.07);
+    margin-top: 2.5rem;
+  }
+  .musician {
+    background: var(--gris);
+    padding: 1.4rem 1.6rem;
+    transition: background 0.2s;
+  }
+  .musician:hover { background: rgba(245,216,0,0.06); }
+  .musician-role {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--jaune);
+    margin-bottom: 0.4rem;
+  }
+  .musician-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--blanc);
+  }
+
+  /* ── SUSANA HIGHLIGHT ── */
+  .susana-block {
+    background: linear-gradient(135deg, rgba(245,216,0,0.1) 0%, transparent 60%);
+    border: 1px solid rgba(245,216,0,0.25);
+    border-radius: 4px;
+    padding: 2rem 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .susana-block .section-eyebrow { margin-bottom: 0.5rem; }
+  .susana-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    color: var(--jaune);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.8rem;
+  }
+
+  /* ── PRATIQUE ── */
+  .pratique-section { background: var(--jaune); color: var(--noir); }
+  .pratique-section .section-title { color: var(--noir); }
+  .pratique-section .section-eyebrow { color: rgba(0,0,0,0.5); }
+
+  .pratique-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+  .pratique-card {
+    background: rgba(0,0,0,0.08);
+    border-radius: 3px;
+    padding: 1.5rem;
+  }
+  .pratique-card-icon { font-size: 1.6rem; margin-bottom: 0.8rem; }
+  .pratique-card-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 0.4rem;
+  }
+  .pratique-card-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.05em;
+  }
+  .pratique-card-sub {
+    font-size: 0.82rem;
+    opacity: 0.7;
+    margin-top: 0.3rem;
+  }
+
+  .contact-block {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0,0,0,0.15);
+  }
+  .contact-block p {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .contact-block a {
+    color: var(--noir);
+    font-weight: 600;
+  }
+
+  /* ── MAP ── */
+  .map-section { background: var(--gris); padding: 0; }
+  .map-header { padding: 3.5rem 1.5rem 2rem; }
+  .map-frame {
+    width: 100%;
+    height: 450px;
+    border: none;
+    display: block;
+  }
+  .map-caption {
+    padding: 1.2rem 1.5rem;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.1em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0A0A0A;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.1em;
+  }
+  footer strong { color: var(--jaune); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 500px) {
+    .hero { padding: 3rem 1rem 4rem; }
+    .hero-date-block { padding: 1rem 1.2rem; }
+    .susana-block { padding: 1.4rem 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <span class="ticker-inner">
+    ♩ FOUX DE JAZZ #2 &nbsp;·&nbsp; 11 AOÛT 2026 &nbsp;·&nbsp; SOURCE DE LA BUÈGES &nbsp;·&nbsp; 20H30 &nbsp;·&nbsp; SWING AMBASSADORS SEPTET &nbsp;·&nbsp; SUSANA SHEIMAN &nbsp;·&nbsp; PÉGAIROLLES DE BUÈGES &nbsp;·&nbsp; RÉSERVATION OBLIGATOIRE &nbsp;·&nbsp; 15€ / PERSONNE &nbsp;·&nbsp; ♩ FOUX DE JAZZ #2 &nbsp;·&nbsp; 11 AOÛT 2026 &nbsp;·&nbsp; SOURCE DE LA BUÈGES &nbsp;·&nbsp; 20H30 &nbsp;·&nbsp; SWING AMBASSADORS SEPTET &nbsp;·&nbsp; SUSANA SHEIMAN &nbsp;·&nbsp; PÉGAIROLLES DE BUÈGES &nbsp;·&nbsp; RÉSERVATION OBLIGATOIRE &nbsp;·&nbsp; 15€ / PERSONNE &nbsp;·&nbsp;
+  </span>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="deco deco-1"></div>
+  <div class="deco deco-2"></div>
+
+  <p class="presenter-label">La commune de Pégairolles de Buèges &amp; le comité des fêtes Lo Dralhau présentent</p>
+  <div class="hero-edition">2ème édition</div>
+  <h1 class="hero-title">FOUX<br>DE JAZZ</h1>
+  <p class="hero-subtitle">« Swing time à la source »</p>
+
+  <div class="hero-date-block">
+    <div class="hero-date">Mardi 11 Août 2026</div>
+    <div class="hero-time">20h30 — Source de la Buèges · Pégairolles de Buèges</div>
+  </div>
+
+  <p class="hero-artists">Avec <span>The Swing Ambassadors Septet</span> &amp; <span>Susana Sheiman</span></p>
+
+  <a href="#reservation" class="btn-reserve">Réserver ma place — 15€</a>
+
+  <div class="scroll-hint">Découvrir</div>
+</section>
+
+<!-- LIEU -->
+<section class="lieu-section">
+  <div class="container">
+    <div class="lieu-grid">
+      <div>
+        <p class="section-eyebrow">Le lieu</p>
+        <h2 class="section-title">La « Foux »<br>de la Buèges</h2>
+        <div class="section-body">
+          <p>Le mot <em class="foux-word">Foux</em> vient de l'occitan <em>fos</em>, qui désigne une source — du latin <em>fons, fontis</em>.</p>
+          <p>La spectaculaire source de la Buèges est l'un des sites emblématiques du territoire du Grand Pic Saint-Loup. Inspiré par les vibrations de ce lieu exceptionnel, un des fondateurs des Swing Ambassadors a proposé à la Commune de Pégairolles de Buèges d'y tenir un spectacle de jazz en plein air.</p>
+          <p>Après le succès de la première édition en juillet 2025, cette deuxième édition s'annonce encore plus festive, avec le concours de la communauté de communes du Grand-Pic-Saint-Loup.</p>
+        </div>
+      </div>
+      <div>
+        <img src="V2_retenue.png"
+             alt="Affiche Foux de Jazz 2026"
+             style="width:100%;border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARTISTES -->
+<section class="artists-section">
+  <div class="container">
+    <p class="section-eyebrow">Les artistes</p>
+    <h2 class="section-title">Sur scène</h2>
+
+    <div class="susana-block">
+      <p class="section-eyebrow">Chant &amp; Scat</p>
+      <div class="susana-name">Susana Sheiman</div>
+      <p class="section-body">Diva madrilène et l'une des plus grandes voix du jazz ibérique et européen, Susana Sheiman a rejoint les Swing Ambassadors en 2017 pour un vibrant hommage aux grandes voix du jazz. Depuis, le succès est au rendez-vous et le groupe se produit partout en France dans les plus grands festivals.</p>
+    </div>
+
+    <div class="section-body" style="margin-bottom:1.5rem;">
+      <p>Inspirés par les clubs de Kansas City (1920–1970), les talentueux musiciens du <strong style="color:var(--blanc);">Swing Ambassadors Septet</strong> élaborent un programme festif, raffiné et efficace. Leur répertoire puise dans Count Basie, Duke Ellington, Cole Porter et bien d'autres noms prestigieux du jazz classique.</p>
+    </div>
+
+    <div class="musicians-grid">
+      <div class="musician"><div class="musician-role">Chant &amp; Scat</div><div class="musician-name">Susana Sheiman</div></div>
+      <div class="musician"><div class="musician-role">Trombone</div><div class="musician-name">Rémi Vidal</div></div>
+      <div class="musician"><div class="musician-role">Trompette &amp; Bugle</div><div class="musician-name">Dominique Rieux</div></div>
+      <div class="musician"><div class="musician-role">Contrebasse</div><div class="musician-name">Jean Pierre Barreda</div></div>
+      <div class="musician"><div class="musician-role">Saxo Ténor</div><div class="musician-name">Philippe Dieudonné George</div></div>
+      <div class="musician"><div class="musician-role">Piano</div><div class="musician-name">Cédric Chauveau</div></div>
+      <div class="musician"><div class="musician-role">Saxo Alto &amp; Scat</div><div class="musician-name">Max Alipe Michel</div></div>
+      <div class="musician"><div class="musician-role">Batterie</div><div class="musician-name">André Neufert</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRATIQUE -->
+<section class="pratique-section" id="reservation">
+  <div class="container">
+    <p class="section-eyebrow">Informations pratiques</p>
+    <h2 class="section-title">Tout savoir pour venir</h2>
+
+    <div class="pratique-grid">
+      <div class="pratique-card">
+        <div class="pratique-card-icon">📅</div>
+        <div class="pratique-card-label">Date</div>
+        <div class="pratique-card-value">11 Août 2026</div>
+        <div class="pratique-card-sub">Mardi soir, 20h30</div>
+      </div>
+      <div class="pratique-card">
+        <div class="pratique-card-icon">📍</div>
+        <div class="pratique-card-label">Lieu</div>
+        <div class="pratique-card-value">Source de la Buèges</div>
+        <div class="pratique-card-sub">Pégairolles de Buèges<br>À 22 km de St-Martin de Londres</div>
+      </div>
+      <div class="pratique-card">
+        <div class="pratique-card-icon">🎟️</div>
+        <div class="pratique-card-label">Tarif</div>
+        <div class="pratique-card-value">15 € / personne</div>
+        <div class="pratique-card-sub">Gratuit pour les moins de 14 ans</div>
+      </div>
+      <div class="pratique-card">
+        <div class="pratique-card-icon">🍽️</div>
+        <div class="pratique-card-label">Sur place</div>
+        <div class="pratique-card-value">Buvette &amp; Restauration</div>
+        <div class="pratique-card-sub">Parking &amp; toilettes publiques à proximité</div>
+      </div>
+    </div>
+
+    <div class="contact-block">
+      <p style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.08em;margin-bottom:1rem;">Réservation obligatoire — Places limitées</p>
+      <p>📞 Par téléphone : <a href="tel:0650117840">06 50 11 78 40</a></p>
+      <p>✉️ Par e-mail : <a href="mailto:lo-dralhau@mailo.com">lo-dralhau@mailo.com</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="map-section">
+  <div class="map-header container">
+    <p class="section-eyebrow">Plan d'accès</p>
+    <h2 class="section-title">Comment venir</h2>
+    <p class="section-body" style="margin-bottom:0.5rem;">Source de la Buèges — Commune de Pégairolles de Buèges, à 22 km de St-Martin de Londres.<br>Parking et toilettes publiques à proximité immédiate du site.</p>
+  </div>
+
+  <iframe
+    class="map-frame"
+    title="Plan d'accès – Foux de Jazz 2026"
+    loading="lazy"
+    allowfullscreen
+    referrerpolicy="no-referrer-when-downgrade"
+    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFmBWY&q=43.81354,3.59114&zoom=14&maptype=roadmap"
+  ></iframe>
+  <!-- Fallback : OpenStreetMap (no API key needed) -->
+  <script>
+    const iframe = document.querySelector('.map-frame');
+    iframe.onerror = function() {
+      this.src = "https://www.openstreetmap.org/export/embed.html?bbox=3.5711%2C43.7935%2C3.6111%2C43.8335&layer=mapnik&marker=43.81354%2C3.59114";
+    };
+    // Try OSM directly as Google Maps Embed needs a valid API key in production
+    iframe.src = "https://www.openstreetmap.org/export/embed.html?bbox=3.5711%2C43.7935%2C3.6111%2C43.8335&layer=mapnik&marker=43.81354%2C3.59114";
+  </script>
+
+  <div class="map-caption">
+    📌 Coordonnées GPS : 43.81354° N — 3.59114° E &nbsp;·&nbsp;
+    <a href="https://www.google.com/maps?q=43.81354,3.59114" target="_blank" rel="noopener"
+       style="color:var(--jaune);text-decoration:none;">Ouvrir dans Google Maps ↗</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.15em;color:var(--jaune);margin-bottom:0.5rem;">FOUX DE JAZZ #2 — 11 Août 2026</p>
+  <p>Organisé par <strong>la Commune de Pégairolles de Buèges</strong> et <strong>le Comité des Fêtes Lo Dralhau</strong><br>
+  avec le concours de la Communauté de Communes du Grand-Pic-Saint-Loup</p>
+</footer>
+
+</body>
+</html>
