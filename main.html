@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foux du Jazz — Source de la Buège</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --nuit: #0D0D1A;
+    --bleu-nuit: #1A1A3E;
+    --or: #C9A84C;
+    --or-clair: #E8D08A;
+    --creme: #F2EDE4;
+    --cuivre: #8B6914;
+    --texte-sombre: #1a1a2e;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--nuit);
+    color: var(--creme);
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 60% 40%, rgba(201,168,76,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 80%, rgba(26,26,62,0.9) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  /* Titre vertical — signature de l'affiche */
+  .titre-vertical {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    color: var(--or);
+    opacity: 0.15;
+    padding: 2rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    white-space: nowrap;
+  }
+
+  .hero-contenu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 3rem 4rem 1rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--or);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+  }
+
+  .titre-principal {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-weight: 900;
+    line-height: 0.9;
+    color: var(--creme);
+    margin-bottom: 0.2em;
+  }
+
+  .titre-principal em {
+    font-style: italic;
+    color: var(--or);
+  }
+
+  .sous-titre {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1rem, 3vw, 1.6rem);
+    font-style: italic;
+    font-weight: 400;
+    color: rgba(242,237,228,0.6);
+    margin-top: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .separateur-or {
+    width: 60px;
+    height: 2px;
+    background: var(--or);
+    margin-bottom: 2rem;
+  }
+
+  .infos-rapides {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .info-ligne {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    font-size: 1.05rem;
+  }
+
+  .info-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--or);
+    font-weight: 600;
+    min-width: 80px;
+  }
+
+  .info-valeur {
+    color: var(--creme);
+    font-weight: 400;
+  }
+
+  .scroll-invite {
+    position: absolute;
+    bottom: 2rem;
+    right: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(242,237,228,0.3);
+  }
+
+  .scroll-invite::after {
+    content: '';
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(201,168,76,0.5), transparent);
+  }
+
+  /* VAGUE DÉCORATIVE */
+  .vague-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: -2px;
+  }
+
+  /* SECTION LIEU */
+  .section {
+    padding: 5rem 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--or);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-titre {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--creme);
+    margin-bottom: 1.5rem;
+    line-height: 1.15;
+  }
+
+  .section-titre em { color: var(--or); font-style: italic; }
+
+  .section-corps {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: rgba(242,237,228,0.7);
+    max-width: 620px;
+  }
+
+  /* GRILLE PROGRAMME */
+  .grille-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .carte-programme {
+    border: 1px solid rgba(201,168,76,0.25);
+    padding: 2rem;
+    position: relative;
+  }
+
+  .carte-programme::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--or);
+  }
+
+  .carte-heure {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--or);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .carte-event {
+    font-size: 0.9rem;
+    color: rgba(242,237,228,0.5);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+
+  .carte-desc {
+    font-size: 1rem;
+    color: rgba(242,237,228,0.8);
+    line-height: 1.6;
+  }
+
+  /* BANDE DORÉE — ARTISTES */
+  .bande-artistes {
+    background: var(--bleu-nuit);
+    border-top: 1px solid rgba(201,168,76,0.2);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    padding: 5rem 2rem;
+  }
+
+  .bande-artistes .interieur {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .note-musicale {
+    font-size: 4rem;
+    opacity: 0.12;
+    position: absolute;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* SECTION LIEU NATUREL */
+  .encart-lieu {
+    background: rgba(201,168,76,0.06);
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 3rem;
+    margin-top: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .encart-lieu::after {
+    content: '♩';
+    position: absolute;
+    font-size: 8rem;
+    right: 2rem;
+    bottom: -1rem;
+    opacity: 0.05;
+    line-height: 1;
+  }
+
+  .encart-titre {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--or);
+    margin-bottom: 1rem;
+  }
+
+  .encart-texte {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: rgba(242,237,228,0.7);
+  }
+
+  /* FOOTER */
+  .footer {
+    background: #070710;
+    padding: 3rem 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--or);
+    opacity: 0.6;
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-sub {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: rgba(242,237,228,0.3);
+    text-transform: uppercase;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    .hero { grid-template-columns: 50px 1fr; }
+    .titre-vertical { font-size: 2.5rem; }
+    .hero-contenu { padding: 3rem 1.5rem 3rem 0.5rem; }
+    .scroll-invite { display: none; }
+    .section { padding: 3rem 1.5rem; }
+    .encart-lieu { padding: 2rem 1.5rem; }
+  }
+
+  /* Animation légère au chargement */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-contenu > * {
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-contenu > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-contenu > *:nth-child(2) { animation-delay: 0.25s; }
+  .hero-contenu > *:nth-child(3) { animation-delay: 0.35s; }
+  .hero-contenu > *:nth-child(4) { animation-delay: 0.45s; }
+  .hero-contenu > *:nth-child(5) { animation-delay: 0.55s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-contenu > * { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="titre-vertical" aria-hidden="true">Jazz</div>
+
+  <div class="hero-contenu">
+    <p class="eyebrow">Pégairolles-de-Buège · Été 2025</p>
+
+    <h1 class="titre-principal">
+      Foux<br>du <em>Jazz</em>
+    </h1>
+
+    <p class="sous-titre">Une nuit de musique à la source de la Buège</p>
+
+    <div class="separateur-or"></div>
+
+    <div class="infos-rapides">
+      <div class="info-ligne">
+        <span class="info-label">Date</span>
+        <span class="info-valeur">Été 2025 — date à confirmer</span>
+      </div>
+      <div class="info-ligne">
+        <span class="info-label">Lieu</span>
+        <span class="info-valeur">Source de la Buège, Pégairolles-de-Buège</span>
+      </div>
+      <div class="info-ligne">
+        <span class="info-label">Accès</span>
+        <span class="info-valeur">Gratuit &amp; ouvert à tous</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-invite">Découvrir</div>
+</section>
+
+<!-- VAGUE SVG entre hero et contenu -->
+<svg class="vague-svg" viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0,40 C360,80 1080,0 1440,40 L1440,0 L0,0 Z" fill="#0D0D1A"/>
+  <path d="M0,40 C360,80 1080,0 1440,40 L1440,60 L0,60 Z" fill="#0D0D1A"/>
+</svg>
+
+<!-- SECTION PROGRAMME -->
+<div style="background: #0D0D1A; padding: 0 0 2rem;">
+  <div class="section">
+    <p class="section-label">Au programme</p>
+    <h2 class="section-titre">Une soirée sous <em>les étoiles</em></h2>
+    <p class="section-corps">
+      Venez vivre une soirée jazz unique en pleine nature, au bord de la Buège. Musique, convivialité et fraîcheur nocturne se mêlent pour une expérience inoubliable au cœur de l'Hérault.
+    </p>
+
+    <div class="grille-2">
+      <div class="carte-programme">
+        <div class="carte-heure">19h</div>
+        <div class="carte-event">Ouverture du site</div>
+        <div class="carte-desc">Arrivée des festivaliers, installation, pique-nique bienvenu. La source et ses abords vous accueillent dans le calme du soir.</div>
+      </div>
+      <div class="carte-programme">
+        <div class="carte-heure">20h</div>
+        <div class="carte-event">Concert Jazz</div>
+        <div class="carte-desc">Un groupe de jazz prend place sur scène et fait vibrer la nuit languedocienne. Standards, improvisations et créations originales.</div>
+      </div>
+      <div class="carte-programme">
+        <div class="carte-heure">21h</div>
+        <div class="carte-event">Bœuf musical</div>
+        <div class="carte-desc">Le moment convivial où les musiciens de passage sont les bienvenus pour rejoindre le groupe et prolonger la musique ensemble.</div>
+      </div>
+      <div class="carte-programme">
+        <div class="carte-heure">23h</div>
+        <div class="carte-event">Fin de soirée</div>
+        <div class="carte-desc">La nuit s'étire encore un peu sous les étoiles, avec la Buège pour fond sonore permanent.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BANDE ARTISTES -->
+<div class="bande-artistes">
+  <div class="interieur">
+    <p class="section-label">Les artistes</p>
+    <h2 class="section-titre" style="margin-bottom: 2rem;">Le groupe de jazz</h2>
+
+    <div class="encart-lieu">
+      <div class="encart-titre">♪ &nbsp;Musiciens à confirmer</div>
+      <p class="encart-texte">
+        Le line-up artistique sera annoncé prochainement. En attendant, sachez que la soirée mettra à l'honneur 
+        un jazz vivant, chaleureux et accessible — pensé pour resonner avec la douceur du lieu.
+        Guitare, contrebasse, batterie, soufflants : une formation acoustique au plus près de la nature.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION LIEU -->
+<div style="background: #0D0D1A;">
+  <div class="section">
+    <p class="section-label">Le lieu</p>
+    <h2 class="section-titre">La source de <em>la Buège</em></h2>
+    <p class="section-corps">
+      Pégairolles-de-Buège est un village de caractère niché dans les contreforts du Larzac, 
+      à une quarantaine de kilomètres au nord de Montpellier. La source de la Buège — résurgence 
+      calcaire aux eaux cristallines — offre un cadre sauvage et préservé, idéal pour une nuit de jazz en plein air.
+    </p>
+
+    <div class="encart-lieu" style="margin-top: 3rem;">
+      <div class="encart-titre">🗺 &nbsp;Comment venir</div>
+      <p class="encart-texte">
+        <strong style="color: var(--creme);">En voiture :</strong> depuis Montpellier, direction Ganges par la D986, puis Pégairolles-de-Buège. 
+        Des informations de stationnement et un éventuel navette seront communiqués ultérieurement.<br><br>
+        <strong style="color: var(--creme);">À noter :</strong> le site est en zone naturelle. Merci d'y accéder à pied depuis les parkings indiqués. 
+        Prévoir une lampe torche pour le retour et des vêtements chauds — les nuits à la source peuvent être fraîches.
+      </p>
+    </div>
+
+    <div class="encart-lieu" style="margin-top: 1.5rem;">
+      <div class="encart-titre">ℹ &nbsp;Infos pratiques</div>
+      <p class="encart-texte">
+        · Événement <strong style="color: var(--creme);">gratuit et ouvert à tous</strong><br>
+        · Prévoir de quoi s'asseoir (chaises, couvertures)<br>
+        · Pique-nique bienvenu sur place<br>
+        · Respect du site naturel demandé — pas de déchets laissés<br>
+        · Accès possible en famille, y compris avec enfants<br>
+        · Animaux en laisse acceptés
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">Foux du Jazz</div>
+  <p class="footer-sub">Pégairolles-de-Buège · Source de la Buège · Hérault</p>
+  <p style="margin-top: 2rem; font-size: 0.75rem; color: rgba(242,237,228,0.15);">
+    Pour toute information, contactez l'organisation de l'événement.
+  </p>
+</footer>
+
+</body>
+</html>
